@@ -5,17 +5,17 @@ import PackageDescription
 let package = Package(
     name: "CombineX",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v10),
-        .tvOS(.v10),
-        .watchOS(.v3)
+        .macOS(.v10_10),
+        .iOS(.v8),
+        .tvOS(.v9),
+        .watchOS(.v2)
     ],
     products: [
         .library(name: "CombineX", targets: ["CombineX"])
     ],
     dependencies: [
         .package(url: "https://github.com/Quick/Quick.git", from: "2.0.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0")
+        .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.0"),
     ],
     targets: [
         .target(name: "CombineX"),

@@ -46,6 +46,9 @@ class DemandSpec: QuickSpec {
                 expect(d).to(equal(.max(3)))
                 
                 expect(Demand.max(1) + (-1)).to(equal(.max(0)))
+                
+                expect(Demand.unlimited + 1).to(equal(.unlimited))
+                expect(Demand.unlimited + .unlimited).to(equal(.unlimited))
             }
             
             // MARK: 2.2 should sub as expected
@@ -129,7 +132,11 @@ class DemandSpec: QuickSpec {
                 
                 expect {
                     let encoder = JSONEncoder()
-                    encoder.outputFormatting = [.sortedKeys]
+                    if #available(macOS 13.0, iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+                        encoder.outputFormatting = [.sortedKeys]
+                    } else {
+                        // FIXME: output formatting
+                    }
                     let data = try encoder.encode(q)
                     
                     expect(String(data: data, encoding: .utf8)).to(equal(#"{"a":9223372036854775808,"b":10}"#))
